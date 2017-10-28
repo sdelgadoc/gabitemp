@@ -12,7 +12,7 @@ myAPI = config.api_key
 
 logging.basicConfig(level=logging.DEBUG,
                     format='%(asctime)s %(levelname)s %(message)s',
-                    filename=datetime.now().strftime('gabitemp_%H_%M_%d_%m_%Y.log'),
+                    filename=datetime.now().strftime('gabitemp_%Y_%m_%d_%H_%M.log'),
                     filemode='w')
 
 def getSensorData(): 
@@ -30,10 +30,10 @@ def main():
 	   try:
            	f = urllib2.urlopen(baseURL + 
                                		"&field1=%s&field2=%s" % (T, RH))
-	   except URLError as e_URLError:
+	   except urllib2.URLError as e_URLError:
 		logging.warning("URLError " + str(e_URLError))
 		pass
-	   except HTTPError as e_HTTPError:
+	   except urllib2.HTTPError as e_HTTPError:
 		logging.warning("HTTPError " + str(e_HTTPError))
 		pass
 	   except Exception as e:
