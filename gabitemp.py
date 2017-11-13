@@ -32,26 +32,27 @@ def main():
 	   try:
            	f = urllib2.urlopen(baseURL + 
                                		"&field1=%s&field2=%s" % (T, RH))
+		logging.info("Thingspeak return value " + f.read())
+               	f.close()
+
 	   except urllib2.URLError as e_URLError:
-		logging.warning("URLError " + str(e_URLError) + " " + 
-                                traceback.format_exc())
+		logging.warning("URLError " + str(e_URLError))
+      		traceback.print_exc()
 		pass
 	   except urllib2.HTTPError as e_HTTPError:
-		logging.warning("HTTPError " + str(e_HTTPError) + " " +
-                                traceback.format_exc())
+		logging.warning("HTTPError " + str(e_HTTPError))
+                traceback.print_exc()
 		pass
 	   except Exception as e:
-		loggging.warning("Unmanaged urllib2 error " + str(e) + " " +
-                                 traceback.format_exc())
+		loggging.warning("Unmanaged urllib2 error " + str(e))
+          	traceback.print_exc()
 		pass
 
-	   logging.info("Thingspeak return value " + f.read())
-	   f.close()
            sleep(60) #uploads DHT22 sensor values every 2 minutes 
 
        except Exception as e: 
-       	   print logging.warning("Unmanaged error, exiting " + str(e) + " " +
-                                 traceback.format_exc())
+       	   print logging.warning("Unmanaged error, exiting " + str(e))
+	   traceback.print_exc()
            pass 
 # call main 
 if __name__ == '__main__': 
